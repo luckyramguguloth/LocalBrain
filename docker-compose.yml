@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  qdrant:
+    image: qdrant/qdrant:latest
+    ports: ["6333:6333"]
+    restart: unless-stopped
+  neo4j:
+    image: neo4j:5.15.0
+    environment: ["NEO4J_AUTH=neo4j/secure_memory_neo4j"]
+    ports: ["7474:7474", "7687:7687"]
+    restart: unless-stopped
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: memory_admin
+      POSTGRES_PASSWORD: secure_memory_pg
+      POSTGRES_DB: memory_metadata
+    ports: ["5433:5432"]
+    restart: unless-stopped
+  redis:
+    image: redis:7-alpine
+    ports: ["6379:6379"]
+    restart: unless-stopped
+    
+  # --- Layer 5: Identity ---
+  keycloak:
+    image: quay.io/keycloak/keycloak:23.0.0
+    command: start-dev
+    environment:
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://postgres:5432/memory_metadata
+      KC_DB_USERNAME: memory_admin
+      KC_DB_PASSWORD: secure_memory_pg
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    ports: ["8085:8080"]
+    depends_on: [postgres]
+
+  # --- Layer 4: Encryption ---
+  vault:
+    image: hashicorp/vault:1.15
+    environment:
+      VAULT_DEV_ROOT_TOKEN_ID: root
+    ports: ["8200:8200"]
+    cap_add: ["IPC_LOCK"]

@@ -1,0 +1,243 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 850" width="100%" height="100%" style="background-color: #0f172a; font-family: 'Outfit', 'Inter', -apple-system, sans-serif;">
+  <defs>
+    <!-- Drop Shadow Filter -->
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#020617" flood-opacity="0.5" />
+    </filter>
+    
+    <!-- Gradients -->
+    <linearGradient id="uiGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#60a5fa" />
+    </linearGradient>
+    <linearGradient id="backendGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#a855f7" />
+      <stop offset="100%" stop-color="#c084fc" />
+    </linearGradient>
+    <linearGradient id="dbGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#eab308" />
+      <stop offset="100%" stop-color="#facc15" />
+    </linearGradient>
+    <linearGradient id="llmGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f97316" />
+      <stop offset="100%" stop-color="#fb923c" />
+    </linearGradient>
+    <linearGradient id="mcpGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#06b6d4" />
+      <stop offset="100%" stop-color="#22d3ee" />
+    </linearGradient>
+
+    <!-- Arrow Marker -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#3b82f6" />
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#a855f7" />
+    </marker>
+  </defs>
+
+  <!-- Title & Subtitle -->
+  <g transform="translate(40, 45)">
+    <text x="0" y="0" font-size="28" font-weight="800" fill="#f8fafc" letter-spacing="-0.025em">LOCAL BRAIN</text>
+    <text x="195" y="0" font-size="28" font-weight="300" fill="#94a3b8">|</text>
+    <text x="215" y="-2" font-size="16" font-weight="500" fill="#38bdf8">SYSTEM ARCHITECTURE</text>
+    <text x="0" y="24" font-size="14" font-weight="400" fill="#64748b">Enterprise-Grade, On-Premise, 100% Private AI Knowledge Engine</text>
+  </g>
+
+  <!-- 1. USER INTERFACE LAYER -->
+  <g transform="translate(40, 100)" filter="url(#shadow)">
+    <!-- Container -->
+    <rect x="0" y="0" width="920" height="150" rx="16" fill="#1e293b" stroke="#334155" stroke-width="1.5" />
+    <!-- Header -->
+    <rect x="0" y="0" width="920" height="42" rx="16" fill="url(#uiGrad)" />
+    <!-- Round bottom corners of header -->
+    <rect x="0" y="26" width="920" height="16" fill="#1e293b" />
+    <line x1="0" y1="42" x2="920" y2="42" stroke="#334155" stroke-width="1.5" />
+    <text x="20" y="26" font-size="15" font-weight="700" fill="#ffffff">👤 USER INTERFACE LAYER (Next.js 14 Web App)</text>
+
+    <!-- Component Blocks -->
+    <!-- Chat Interface -->
+    <g transform="translate(20, 60)">
+      <rect x="0" y="0" width="260" height="70" rx="10" fill="#0f172a" stroke="#3b82f6" stroke-width="1" />
+      <text x="15" y="25" font-size="13" font-weight="700" fill="#f8fafc">🖥️ Glassmorphic Chat Console</text>
+      <text x="15" y="42" font-size="11" font-weight="400" fill="#94a3b8">Interactive queries, tables, lists, comparisons</text>
+      <text x="15" y="55" font-size="11" font-weight="400" fill="#94a3b8">WebSocket live status logging &amp; feedback</text>
+    </g>
+
+    <!-- File Upload -->
+    <g transform="translate(300, 60)">
+      <rect x="0" y="0" width="260" height="70" rx="10" fill="#0f172a" stroke="#475569" stroke-width="1" />
+      <text x="15" y="25" font-size="13" font-weight="700" fill="#f8fafc">📎 Multi-Format Upload Zone</text>
+      <text x="15" y="42" font-size="11" font-weight="400" fill="#94a3b8">Drag &amp; drop file ingestion support</text>
+      <text x="15" y="55" font-size="11" font-weight="400" fill="#94a3b8">PDF, Word, Excel, CSV, PPTX, JSON, Images</text>
+    </g>
+
+    <!-- Interactive Graph -->
+    <g transform="translate(580, 60)">
+      <rect x="0" y="0" width="320" height="70" rx="10" fill="#0f172a" stroke="#475569" stroke-width="1" />
+      <text x="15" y="25" font-size="13" font-weight="700" fill="#f8fafc">🕸️ Interactive Force-Directed Graph</text>
+      <text x="15" y="42" font-size="11" font-weight="400" fill="#38bdf8">Visual synapse networks &amp; node click discovery</text>
+      <text x="15" y="55" font-size="11" font-weight="400" fill="#94a3b8">Real-time local relation visualizer</text>
+    </g>
+  </g>
+
+  <!-- Connection: UI Layer -> Backend API -->
+  <path d="M 170,250 L 170,300" fill="none" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow-blue)" />
+
+  <!-- 2. FASTAPI AUTONOMIC BACKEND -->
+  <g transform="translate(40, 300)" filter="url(#shadow)">
+    <rect x="0" y="0" width="410" height="340" rx="16" fill="#1e293b" stroke="#334155" stroke-width="1.5" />
+    <rect x="0" y="0" width="410" height="42" rx="16" fill="url(#backendGrad)" />
+    <rect x="0" y="26" width="410" height="16" fill="#1e293b" />
+    <line x1="0" y1="42" x2="410" y2="42" stroke="#334155" stroke-width="1.5" />
+    <text x="20" y="26" font-size="15" font-weight="700" fill="#ffffff">⚙️ FASTAPI AUTONOMIC ENGINE (Port 8000)</text>
+
+    <!-- Subcomponents -->
+    <!-- Document Parser -->
+    <g transform="translate(20, 60)">
+      <rect x="0" y="0" width="370" height="48" rx="8" fill="#0f172a" stroke="#475569" stroke-width="1" />
+      <text x="12" y="20" font-size="12" font-weight="700" fill="#e2e8f0">📄 Robust Ingestion &amp; Document Parsers</text>
+      <text x="12" y="36" font-size="10" font-weight="400" fill="#94a3b8">Custom paragraph text, multi-sheet cell, &amp; slide outline resolvers</text>
+    </g>
+
+    <!-- Custom NLP Processor -->
+    <g transform="translate(20, 114)">
+      <rect x="0" y="0" width="370" height="48" rx="8" fill="#0f172a" stroke="#a855f7" stroke-width="1" />
+      <text x="12" y="20" font-size="12" font-weight="700" fill="#e2e8f0">🧠 Custom NLP Processor &amp; Title Matcher</text>
+      <text x="12" y="36" font-size="10" font-weight="400" fill="#c084fc">Intent classification, Jaccard token overlap, fuzzy containment</text>
+    </g>
+
+    <!-- Hybrid RAG Pipeline -->
+    <g transform="translate(20, 168)">
+      <rect x="0" y="0" width="370" height="48" rx="8" fill="#0f172a" stroke="#475569" stroke-width="1" />
+      <text x="12" y="20" font-size="12" font-weight="700" fill="#e2e8f0">🔍 Advanced Hybrid RAG Engine</text>
+      <text x="12" y="36" font-size="10" font-weight="400" fill="#94a3b8">Vector + Keyword fallback, sliding context window memory</text>
+    </g>
+
+    <!-- Adaptive Synthesis Engine -->
+    <g transform="translate(20, 222)">
+      <rect x="0" y="0" width="370" height="48" rx="8" fill="#0f172a" stroke="#475569" stroke-width="1" />
+      <text x="12" y="20" font-size="12" font-weight="700" fill="#e2e8f0">✍️ Format-Aware Synthesis Engine</text>
+      <text x="12" y="36" font-size="10" font-weight="400" fill="#94a3b8">Cites sources, lists comparisons, formats custom tables</text>
+    </g>
+
+    <!-- DLP Privacy Scanner -->
+    <g transform="translate(20, 276)">
+      <rect x="0" y="0" width="370" height="48" rx="8" fill="#0f172a" stroke="#ef4444" stroke-width="1" />
+      <text x="12" y="20" font-size="12" font-weight="700" fill="#f87171">🛡️ DLP Privacy Guard &amp; Relevance Filter</text>
+      <text x="12" y="36" font-size="10" font-weight="400" fill="#fca5a5">SSN / Credit Card blocking, relevance overlap guard (≥ 6%)</text>
+    </g>
+  </g>
+
+  <!-- Connections from Backend -->
+  <!-- Backend -> Databases (Bi-directional) -->
+  <path d="M 450,420 L 530,420" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+  <path d="M 530,440 L 450,440" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+  
+  <!-- Backend -> LLM Layer -->
+  <path d="M 350,640 L 350,710 L 530,710" fill="none" stroke="#a855f7" stroke-width="2" marker-end="url(#arrow-purple)" />
+
+  <!-- 3. DATABASE LAYER -->
+  <g transform="translate(550, 300)" filter="url(#shadow)">
+    <rect x="0" y="0" width="410" height="300" rx="16" fill="#1e293b" stroke="#334155" stroke-width="1.5" />
+    <rect x="0" y="0" width="410" height="42" rx="16" fill="url(#dbGrad)" />
+    <rect x="0" y="26" width="410" height="16" fill="#1e293b" />
+    <line x1="0" y1="42" x2="410" y2="42" stroke="#334155" stroke-width="1.5" />
+    <text x="20" y="26" font-size="15" font-weight="700" fill="#0f172a">💾 DATABASE LAYER (Dockerized Stack)</text>
+
+    <!-- Qdrant -->
+    <g transform="translate(20, 60)">
+      <rect x="0" y="0" width="175" height="100" rx="10" fill="#0f172a" stroke="#eab308" stroke-width="1" />
+      <text x="12" y="25" font-size="13" font-weight="700" fill="#f8fafc">🔷 Qdrant</text>
+      <text x="12" y="45" font-size="11" font-weight="700" fill="#eab308">Vector Database</text>
+      <text x="12" y="65" font-size="10" font-weight="400" fill="#94a3b8">1024-dim chunk</text>
+      <text x="12" y="78" font-size="10" font-weight="400" fill="#94a3b8">embeddings</text>
+    </g>
+
+    <!-- Neo4j -->
+    <g transform="translate(215, 60)">
+      <rect x="0" y="0" width="175" height="100" rx="10" fill="#0f172a" stroke="#eab308" stroke-width="1" />
+      <text x="12" y="25" font-size="13" font-weight="700" fill="#f8fafc">🕸️ Neo4j</text>
+      <text x="12" y="45" font-size="11" font-weight="700" fill="#38bdf8">Graph Database</text>
+      <text x="12" y="65" font-size="10" font-weight="400" fill="#94a3b8">Entity relation-</text>
+      <text x="12" y="78" font-size="10" font-weight="400" fill="#94a3b8">ships &amp; synapses</text>
+    </g>
+
+    <!-- PostgreSQL -->
+    <g transform="translate(20, 180)">
+      <rect x="0" y="0" width="175" height="100" rx="10" fill="#0f172a" stroke="#475569" stroke-width="1" />
+      <text x="12" y="25" font-size="13" font-weight="700" fill="#f8fafc">🐘 PostgreSQL</text>
+      <text x="12" y="45" font-size="11" font-weight="700" fill="#38bdf8">Relational Store</text>
+      <text x="12" y="65" font-size="10" font-weight="400" fill="#94a3b8">Document metadata,</text>
+      <text x="12" y="78" font-size="10" font-weight="400" fill="#94a3b8">full text, &amp; RBAC</text>
+    </g>
+
+    <!-- Redis -->
+    <g transform="translate(215, 180)">
+      <rect x="0" y="0" width="175" height="100" rx="10" fill="#0f172a" stroke="#475569" stroke-width="1" />
+      <text x="12" y="25" font-size="13" font-weight="700" fill="#f8fafc">⚡ Redis</text>
+      <text x="12" y="45" font-size="11" font-weight="700" fill="#f43f5e">Fast Cache</text>
+      <text x="12" y="65" font-size="10" font-weight="400" fill="#94a3b8">Query cache,</text>
+      <text x="12" y="78" font-size="10" font-weight="400" fill="#94a3b8">WS event broker</text>
+    </g>
+  </g>
+
+  <!-- 4. LOCAL LLM LAYER -->
+  <g transform="translate(550, 630)" filter="url(#shadow)">
+    <rect x="0" y="0" width="410" height="180" rx="16" fill="#1e293b" stroke="#334155" stroke-width="1.5" />
+    <rect x="0" y="0" width="410" height="42" rx="16" fill="url(#llmGrad)" />
+    <rect x="0" y="26" width="410" height="16" fill="#1e293b" />
+    <line x1="0" y1="42" x2="410" y2="42" stroke="#334155" stroke-width="1.5" />
+    <text x="20" y="26" font-size="15" font-weight="700" fill="#ffffff">🤖 LOCAL LLM LAYER (On-Premise / Hardware)</text>
+
+    <!-- Ollama -->
+    <g transform="translate(20, 60)">
+      <rect x="0" y="0" width="175" height="100" rx="10" fill="#0f172a" stroke="#f97316" stroke-width="1" />
+      <text x="12" y="25" font-size="13" font-weight="700" fill="#f8fafc">🦙 Ollama</text>
+      <text x="12" y="42" font-size="11" font-weight="400" fill="#94a3b8">Local Model Engine</text>
+      <text x="12" y="58" font-size="10" font-weight="700" fill="#f97316">Qwen2.5 / Llama 3</text>
+      <text x="12" y="72" font-size="9" font-weight="400" fill="#64748b">Sub-second generation</text>
+    </g>
+
+    <!-- vLLM (Optional) -->
+    <g transform="translate(215, 60)">
+      <rect x="0" y="0" width="175" height="100" rx="10" fill="#0f172a" stroke="#f97316" stroke-width="1" />
+      <text x="12" y="25" font-size="13" font-weight="700" fill="#f8fafc">⚡ vLLM Server</text>
+      <text x="12" y="42" font-size="11" font-weight="400" fill="#94a3b8">GPU Acceleration</text>
+      <text x="12" y="58" font-size="10" font-weight="700" fill="#f97316">High Throughput</text>
+      <text x="12" y="72" font-size="9" font-weight="400" fill="#64748b">Batch &amp; VRAM optim.</text>
+    </g>
+  </g>
+
+  <!-- Database <-> LLM Layer Connection -->
+  <path d="M 640,600 L 640,630" fill="none" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)" />
+
+  <!-- 5. IDE INTEGRATION / MCP SERVER -->
+  <g transform="translate(40, 670)" filter="url(#shadow)">
+    <rect x="0" y="0" width="410" height="140" rx="16" fill="#1e293b" stroke="#334155" stroke-width="1.5" />
+    <rect x="0" y="0" width="410" height="42" rx="16" fill="url(#mcpGrad)" />
+    <rect x="0" y="26" width="410" height="16" fill="#1e293b" />
+    <line x1="0" y1="42" x2="410" y2="42" stroke="#334155" stroke-width="1.5" />
+    <text x="20" y="26" font-size="15" font-weight="700" fill="#0f172a">🔌 IDE INTEGRATION (MCP Server)</text>
+
+    <g transform="translate(20, 60)">
+      <rect x="0" y="0" width="370" height="60" rx="8" fill="#0f172a" stroke="#06b6d4" stroke-width="1" />
+      <text x="12" y="20" font-size="12" font-weight="700" fill="#e2e8f0">Model Context Protocol (MCP) Bridge</text>
+      <text x="12" y="36" font-size="10" font-weight="400" fill="#94a3b8">Connects database knowledge directly to Cursor / Claude Desktop</text>
+      <text x="12" y="48" font-size="10" font-weight="400" fill="#94a3b8">Tools: search_wiki, get_index, get_page, index_document</text>
+    </g>
+  </g>
+
+  <!-- MCP Server -> Backend API connection -->
+  <path d="M 245,670 L 245,640" fill="none" stroke="#06b6d4" stroke-width="2" marker-end="url(#arrow)" />
+
+  <!-- Legend / Info Badge -->
+  <g transform="translate(400, 825)">
+    <rect x="-10" y="-12" width="220" height="24" rx="12" fill="#1e293b" stroke="#334155" stroke-width="1" />
+    <circle cx="5" cy="0" r="4" fill="#10b981" />
+    <text x="16" y="4" font-size="10" font-weight="600" fill="#94a3b8">Secure On-Premise Sandbox Active</text>
+  </g>
+</svg>

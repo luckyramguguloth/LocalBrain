@@ -1,0 +1,318 @@
+# ============================================================
+#  Local Brain — .gitignore
+#  Keeps sensitive credentials, runtime data, binaries,
+#  large uploads, caches, and local configs off GitHub.
+# ============================================================
+
+
+# ──────────────────────────────────────────────────────────
+# 1. ENVIRONMENT & SECRETS  ← most critical — NEVER commit
+# ──────────────────────────────────────────────────────────
+.env
+.env.local
+.env.development
+.env.development.local
+.env.test
+.env.test.local
+.env.production
+.env.production.local
+.env.staging
+
+# API keys, tokens, service-account files
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cert
+*.cer
+*.der
+service-account*.json
+*-credentials.json
+*-secrets.json
+credentials.json
+token.json
+secrets.toml
+config.secret.*
+
+# HashiCorp Vault local dev token (docker-compose VAULT_DEV_ROOT_TOKEN_ID)
+security/vault_policy.hcl
+
+# Local webserver API config (contains internal ports / tokens)
+webServerApiSettings.json
+
+
+# ──────────────────────────────────────────────────────────
+# 2. UPLOADED DOCUMENTS & USER DATA  ← private user files
+# ──────────────────────────────────────────────────────────
+uploaded_docs/
+temp_uploads/
+
+# Any file type commonly uploaded by users
+*.pdf
+*.docx
+*.doc
+*.xlsx
+*.xls
+*.pptx
+*.ppt
+*.csv
+
+
+# ──────────────────────────────────────────────────────────
+# 3. RUNTIME LOGS
+# ──────────────────────────────────────────────────────────
+*.log
+*.log.*
+app_runtime.log
+app_runtime.log*
+logs/
+log/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+pip-log.txt
+pip-delete-this-directory.txt
+
+
+# ──────────────────────────────────────────────────────────
+# 4. PYTHON VIRTUAL ENVIRONMENT & BUILD ARTIFACTS
+# ──────────────────────────────────────────────────────────
+venv/
+.venv/
+env/
+ENV/
+.env/
+
+# Python build / packaging
+build/
+dist/
+develop-eggs/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Python compiled / cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+
+# Test & coverage caches
+.pytest_cache/
+.tox/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+*.coveragerc
+htmlcov/
+nosetests.xml
+.hypothesis/
+
+
+# ──────────────────────────────────────────────────────────
+# 5. FRONTEND — NODE.JS / NEXT.JS
+# ──────────────────────────────────────────────────────────
+node_modules/
+frontend/node_modules/
+
+# Next.js build output
+.next/
+frontend/.next/
+out/
+frontend/out/
+frontend/build/
+frontend/coverage/
+
+# TypeScript build info (auto-generated)
+*.tsbuildinfo
+frontend/*.tsbuildinfo
+next-env.d.ts
+frontend/next-env.d.ts
+
+# Yarn / pnpm / npm internals
+.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+.pnpm-store/
+
+# Vercel (not needed for on-premise)
+.vercel
+
+
+# ──────────────────────────────────────────────────────────
+# 6. DATABASE DATA DIRECTORIES & LOCAL DB FILES
+# ──────────────────────────────────────────────────────────
+# SQLite / local embedded databases
+*.db
+*.sqlite
+*.sqlite3
+*.db-shm
+*.db-wal
+
+# Qdrant local storage (when not using Docker volume)
+qdrant_storage/
+qdrant_data/
+
+# Neo4j local data
+neo4j_data/
+neo4j/data/
+
+# PostgreSQL local data
+postgres_data/
+pgdata/
+
+# Redis dump file
+dump.rdb
+redis_data/
+
+
+# ──────────────────────────────────────────────────────────
+# 7. DOCKER LOCAL VOLUMES & OVERRIDES
+# ──────────────────────────────────────────────────────────
+docker-compose.override.yml
+docker-compose.local.yml
+.docker/
+
+
+# ──────────────────────────────────────────────────────────
+# 8. IDE & EDITOR FILES
+# ──────────────────────────────────────────────────────────
+# VS Code (workspace settings OK to share, but not local/private ones)
+.vscode/settings.json
+.vscode/launch.json
+.vscode/extensions.json
+.vscode/*.code-workspace
+
+# JetBrains (PyCharm, WebStorm, IntelliJ)
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim / Emacs swap files
+*.sw?
+*.swp
+*.swo
+*~
+\#*\#
+.\#*
+
+
+# ──────────────────────────────────────────────────────────
+# 9. OPERATING SYSTEM FILES
+# ──────────────────────────────────────────────────────────
+# macOS
+.DS_Store
+.DS_Store?
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+
+# Windows
+Thumbs.db
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Linux
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+
+# ──────────────────────────────────────────────────────────
+# 10. LARGE BINARY / MEDIA ASSETS
+# ──────────────────────────────────────────────────────────
+# Large / irrelevant binary assets — block by default
+assets/synapsecore_logo.png
+assets/*.jpg
+assets/*.jpeg
+assets/*.gif
+assets/*.mov
+
+# ✅ KEEP these tracked — they are the demo screenshot & recording shown in the README
+!assets/localbrain_screenshot.png
+!assets/localbrain_demo.mp4
+
+# ML model weights / checkpoints (never commit)
+*.bin
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.gguf
+*.ggml
+*.pkl
+*.pickle
+models/
+model_cache/
+.cache/huggingface/
+.cache/torch/
+
+
+# ──────────────────────────────────────────────────────────
+# 11. SCRATCH / TEMPORARY / TEST FILES
+# ──────────────────────────────────────────────────────────
+scratch/
+tmp/
+temp/
+*.tmp
+*.temp
+*.bak
+*.backup
+*.orig
+
+
+# ──────────────────────────────────────────────────────────
+# 12. INTEGRATION WORKER SECRETS (Slack, Jira, Notion…)
+# ──────────────────────────────────────────────────────────
+# Worker config files that may contain webhook URLs / tokens
+workers/slack/config.json
+workers/jira/config.json
+workers/docs/config.json
+workers/**/*.token
+workers/**/*.secret
+
+
+# ──────────────────────────────────────────────────────────
+# 13. MCP SERVER LOCAL CONFIG
+# ──────────────────────────────────────────────────────────
+# Claude Desktop / Cursor local MCP config (contains local paths)
+claude_desktop_config.json
+.cursor/mcp.json
+
+
+# ──────────────────────────────────────────────────────────
+# 14. TYPING STUBS & GENERATED FILES
+# ──────────────────────────────────────────────────────────
+*.pyi
+py.typed

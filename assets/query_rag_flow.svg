@@ -1,0 +1,250 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1680" width="100%" height="100%" style="background-color: #0f172a; font-family: 'Outfit', 'Inter', -apple-system, sans-serif;">
+  <defs>
+    <!-- Drop Shadow Filter -->
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="112%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#020617" flood-opacity="0.4" />
+    </filter>
+
+    <!-- Gradients -->
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6c5ce7" />
+      <stop offset="100%" stop-color="#a855f7" />
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#06b6d4" />
+    </linearGradient>
+
+    <!-- Box Colors -->
+    <linearGradient id="queryGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#6c5ce7" />
+      <stop offset="100%" stop-color="#4f46e5" />
+    </linearGradient>
+    <linearGradient id="successGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+    <linearGradient id="failGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ef4444" />
+      <stop offset="100%" stop-color="#dc2626" />
+    </linearGradient>
+
+    <!-- Arrow Marker -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#3b82f6" />
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#10b981" />
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#6c5ce7" />
+    </marker>
+  </defs>
+
+  <!-- Title & Subtitle -->
+  <g transform="translate(60, 50)">
+    <text x="0" y="0" font-size="28" font-weight="800" fill="#f8fafc" letter-spacing="-0.025em">LOCAL BRAIN</text>
+    <text x="195" y="0" font-size="28" font-weight="300" fill="#94a3b8">|</text>
+    <text x="215" y="-2" font-size="16" font-weight="500" fill="#a855f7">QUERY &amp; RAG RESPONSE FLOW</text>
+    <text x="0" y="24" font-size="14" font-weight="400" fill="#64748b">Procedural &amp; Neural Semantic Information Retrieval Flow</text>
+  </g>
+
+  <!-- FLOWCHART CANVAS -->
+  
+  <!-- 1. USER QUERY (START) -->
+  <g transform="translate(475, 120)" filter="url(#shadow)">
+    <rect x="0" y="0" width="250" height="60" rx="30" fill="url(#queryGrad)" stroke="#818cf8" stroke-width="1.5" />
+    <text x="125" y="35" font-size="16" font-weight="700" fill="#ffffff" text-anchor="middle">👤 User Query</text>
+  </g>
+
+  <path d="M 600,180 L 600,225" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+
+  <!-- 2. DESTRUCTURING: IS SLASH COMMAND? -->
+  <g transform="translate(450, 225)" filter="url(#shadow)">
+    <polygon points="150,0 300,50 150,100 0,50" fill="#1e293b" stroke="#6c5ce7" stroke-width="1.5" />
+    <text x="150" y="55" font-size="13" font-weight="700" fill="#f8fafc" text-anchor="middle">Is Slash Command?</text>
+  </g>
+
+  <!-- Yes -> Command execution -->
+  <path d="M 750,275 L 850,275" fill="none" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow-blue)" />
+  <text x="800" y="265" font-size="11" font-weight="700" fill="#3b82f6">YES</text>
+
+  <g transform="translate(850, 245)" filter="url(#shadow)">
+    <rect x="0" y="0" width="260" height="60" rx="8" fill="#1e293b" stroke="#3b82f6" stroke-width="1.5" />
+    <text x="15" y="25" font-size="12" font-weight="700" fill="#e2e8f0">💻 Slash Command Router</text>
+    <text x="15" y="42" font-size="10" font-weight="400" fill="#94a3b8">Execute /help, /connect slack, Notion, etc.</text>
+  </g>
+
+  <!-- No -> Next check -->
+  <path d="M 600,325 L 600,370" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+  <text x="612" y="348" font-size="11" font-weight="700" fill="#64748b">NO</text>
+
+  <!-- 3. DESTRUCTURING: IS SUGGESTION CHIP? -->
+  <g transform="translate(450, 370)" filter="url(#shadow)">
+    <polygon points="150,0 300,50 150,100 0,50" fill="#1e293b" stroke="#a855f7" stroke-width="1.5" />
+    <text x="150" y="55" font-size="13" font-weight="700" fill="#f8fafc" text-anchor="middle">Is Suggestion Chip?</text>
+  </g>
+
+  <!-- Yes branches (Summarize, list docs, show connections) -->
+  <path d="M 750,420 L 850,420" fill="none" stroke="#a855f7" stroke-width="2" marker-end="url(#arrow-purple)" />
+  <text x="800" y="410" font-size="11" font-weight="700" fill="#a855f7">YES</text>
+
+  <g transform="translate(850, 375)" filter="url(#shadow)">
+    <rect x="0" y="0" width="280" height="90" rx="10" fill="#1e293b" stroke="#a855f7" stroke-width="1.5" />
+    <text x="15" y="24" font-size="12" font-weight="700" fill="#e2e8f0">🛠️ Instant Query Chips Handler</text>
+    <text x="15" y="42" font-size="10" font-weight="400" fill="#94a3b8">• Summarize docs → Fetch PG &amp; run summaries</text>
+    <text x="15" y="58" font-size="10" font-weight="400" fill="#94a3b8">• List indexed → Build markdown doc table</text>
+    <text x="15" y="74" font-size="10" font-weight="400" fill="#94a3b8">• Show connections → Draw Neo4j linkages</text>
+  </g>
+
+  <!-- No -> Next check -->
+  <path d="M 600,470 L 600,515" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+  <text x="612" y="493" font-size="11" font-weight="700" fill="#64748b">NO</text>
+
+  <!-- 4. REDIS CACHE LOOKUP -->
+  <g transform="translate(425, 515)" filter="url(#shadow)">
+    <rect x="0" y="0" width="350" height="60" rx="10" fill="#1e293b" stroke="#f43f5e" stroke-width="1.5" />
+    <text x="175" y="26" font-size="13" font-weight="700" fill="#f8fafc" text-anchor="middle">⚡ Check Redis Query Cache</text>
+    <text x="175" y="43" font-size="11" font-weight="400" fill="#fb7185" text-anchor="middle">Sub-5ms exact query hash match lookup</text>
+  </g>
+
+  <!-- Cache Hit -->
+  <path d="M 775,545 L 990,545 L 990,1475 L 750,1475" fill="none" stroke="#10b981" stroke-width="2" marker-end="url(#arrow-green)" />
+  <text x="850" y="535" font-size="11" font-weight="700" fill="#10b981">CACHE HIT</text>
+
+  <!-- Cache Miss -->
+  <path d="M 600,575 L 600,620" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+  <text x="612" y="598" font-size="11" font-weight="700" fill="#64748b">CACHE MISS</text>
+
+  <!-- 5. NLP INTENT DETECTION -->
+  <g transform="translate(415, 620)" filter="url(#shadow)">
+    <rect x="0" y="0" width="370" height="75" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="1.5" />
+    <text x="185" y="28" font-size="14" font-weight="700" fill="#f8fafc" text-anchor="middle">🧠 Custom NLP: Intent &amp; Entity Detection</text>
+    <text x="185" y="47" font-size="11" font-weight="400" fill="#94a3b8" text-anchor="middle">Classifies query into 7 semantic actions</text>
+    <text x="185" y="62" font-size="10" font-weight="600" fill="#60a5fa" text-anchor="middle">summarize · analyse · compare · locate · extract · table · general</text>
+  </g>
+
+  <path d="M 600,695 L 600,740" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+
+  <!-- 6. FUZZY DOCUMENT TITLE MATCH -->
+  <g transform="translate(400, 740)" filter="url(#shadow)">
+    <rect x="0" y="0" width="400" height="85" rx="12" fill="#1e293b" stroke="#a855f7" stroke-width="1.5" />
+    <text x="200" y="28" font-size="13" font-weight="700" fill="#f8fafc" text-anchor="middle">🔍 NLP Title Matching (NLPProcessor.match_document_title)</text>
+    <text x="200" y="48" font-size="10" font-weight="400" fill="#94a3b8" text-anchor="middle">Calculates Jaccard token similarity + bigram overlap + exact containment</text>
+    <text x="200" y="63" font-size="10" font-weight="600" fill="#c084fc" text-anchor="middle">E.g., "primed ai document" matches "Primed_AI_Document.pdf" (High Score)</text>
+  </g>
+
+  <!-- Match Found / High Score Path -->
+  <path d="M 400,782 L 230,782 L 230,875" fill="none" stroke="#a855f7" stroke-width="2" marker-end="url(#arrow-purple)" />
+  <text x="290" y="770" font-size="11" font-weight="700" fill="#a855f7">MATCH FOUND</text>
+
+  <!-- No Match Path -->
+  <path d="M 800,782 L 950,782 L 950,875" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+  <text x="850" y="770" font-size="11" font-weight="700" fill="#64748b">NO TITLE MATCH</text>
+
+  <!-- Left Branch: Load full document content directly from PostgreSQL -->
+  <g transform="translate(60, 875)" filter="url(#shadow)">
+    <rect x="0" y="0" width="340" height="80" rx="10" fill="#1e293b" stroke="#a855f7" stroke-width="1.5" />
+    <text x="170" y="25" font-size="13" font-weight="700" fill="#f8fafc" text-anchor="middle">🐘 Load Direct Full Content</text>
+    <text x="170" y="45" font-size="11" font-weight="400" fill="#c084fc" text-anchor="middle">Query PostgreSQL to retrieve entire parsed text</text>
+    <text x="170" y="60" font-size="10" font-weight="400" fill="#94a3b8" text-anchor="middle">Allows deep comprehensive analysis of the targeted file</text>
+  </g>
+
+  <!-- Right Branch: Neural Vector Search + Fallback -->
+  <g transform="translate(780, 875)" filter="url(#shadow)">
+    <rect x="0" y="0" width="340" height="80" rx="10" fill="#1e293b" stroke="#eab308" stroke-width="1.5" />
+    <text x="170" y="25" font-size="13" font-weight="700" fill="#f8fafc" text-anchor="middle">🔷 Qdrant Vector Similarity Search</text>
+    <text x="170" y="45" font-size="11" font-weight="400" fill="#facc15" text-anchor="middle">Submit 1024-dim query embedding</text>
+    <text x="170" y="60" font-size="10" font-weight="400" fill="#94a3b8" text-anchor="middle">Scans top semantic document chunks</text>
+  </g>
+
+  <path d="M 950,955 L 950,1000" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+
+  <!-- Score evaluation -->
+  <g transform="translate(800, 1000)" filter="url(#shadow)">
+    <polygon points="150,0 300,45 150,90 0,45" fill="#1e293b" stroke="#eab308" stroke-width="1.5" />
+    <text x="150" y="50" font-size="13" font-weight="700" fill="#f8fafc" text-anchor="middle">Vector Score ≥ 0.40?</text>
+  </g>
+
+  <!-- Yes -> Relevant chunks -->
+  <path d="M 800,1045 L 700,1045 L 700,1130" fill="none" stroke="#10b981" stroke-width="2" marker-end="url(#arrow-green)" />
+  <text x="735" y="1035" font-size="11" font-weight="700" fill="#10b981">YES</text>
+
+  <g transform="translate(560, 1130)" filter="url(#shadow)">
+    <rect x="0" y="0" width="260" height="70" rx="8" fill="#1e293b" stroke="#10b981" stroke-width="1.5" />
+    <text x="15" y="25" font-size="12" font-weight="700" fill="#e2e8f0">📂 Load High-Score ChEMBL</text>
+    <text x="15" y="42" font-size="10" font-weight="400" fill="#34d399">Collect vector chunks matching</text>
+    <text x="15" y="55" font-size="10" font-weight="400" fill="#34d399">semantic user query context</text>
+  </g>
+
+  <!-- No -> Keyword Fallback search -->
+  <path d="M 1100,1045 L 1110,1045 L 1110,1130" fill="none" stroke="#ef4444" stroke-width="2" marker-end="url(#arrow)" />
+  <text x="1118" y="1080" font-size="11" font-weight="700" fill="#ef4444">NO</text>
+
+  <g transform="translate(970, 1130)" filter="url(#shadow)">
+    <rect x="0" y="0" width="220" height="70" rx="8" fill="#1e293b" stroke="#ef4444" stroke-width="1.5" />
+    <text x="15" y="25" font-size="12" font-weight="700" fill="#f87171">🔍 Keyword Fallback Search</text>
+    <text x="15" y="42" font-size="10" font-weight="400" fill="#94a3b8">Search Postgres for matching</text>
+    <text x="15" y="55" font-size="10" font-weight="400" fill="#94a3b8">exact search tokens (BM25 style)</text>
+  </g>
+
+  <!-- Merging retrieval paths -->
+  <path d="M 230,955 L 230,1260 L 450,1260" fill="none" stroke="#a855f7" stroke-width="2" marker-end="url(#arrow-purple)" />
+  <path d="M 690,1200 L 690,1240 L 590,1240 L 590,1260" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+  <path d="M 1080,1200 L 1080,1240 L 610,1240 L 610,1260" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+
+  <!-- 7. RELEVANCE GUARD -->
+  <g transform="translate(425, 1260)" filter="url(#shadow)">
+    <rect x="0" y="0" width="350" height="85" rx="12" fill="#1e293b" stroke="#ef4444" stroke-width="1.5" />
+    <text x="175" y="28" font-size="13" font-weight="700" fill="#f8fafc" text-anchor="middle">🛡️ Custom NLP Relevance Guard</text>
+    <text x="175" y="48" font-size="11" font-weight="400" fill="#fca5a5" text-anchor="middle">Verifies query/context word overlap matches ≥ 6%</text>
+    <text x="175" y="63" font-size="10" font-weight="400" fill="#94a3b8" text-anchor="middle">Prevents LLM from hallucinating answers from wrong files</text>
+  </g>
+
+  <path d="M 600,1345 L 600,1390" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+
+  <!-- Decision: Relevant? -->
+  <g transform="translate(480, 1390)" filter="url(#shadow)">
+    <polygon points="120,0 240,40 120,80 0,40" fill="#1e293b" stroke="#3b82f6" stroke-width="1.5" />
+    <text x="120" y="45" font-size="12" font-weight="700" fill="#f8fafc" text-anchor="middle">Semantically Relevant?</text>
+  </g>
+
+  <!-- Not Relevant -> Error response -->
+  <path d="M 480,1430 L 310,1430" fill="none" stroke="#ef4444" stroke-width="2" marker-end="url(#arrow)" />
+  <text x="380" y="1420" font-size="11" font-weight="700" fill="#ef4444">NO</text>
+
+  <g transform="translate(60, 1400)" filter="url(#shadow)">
+    <rect x="0" y="0" width="250" height="60" rx="8" fill="url(#failGrad)" />
+    <text x="125" y="25" font-size="12" font-weight="700" fill="#ffffff" text-anchor="middle">⚠️ Information Not Found</text>
+    <text x="125" y="42" font-size="10" font-weight="400" fill="#fee2e2" text-anchor="middle">"Query doesn't match indexed context"</text>
+  </g>
+
+  <!-- Relevant -> Synthesis -->
+  <path d="M 600,1470 L 600,1515" fill="none" stroke="#10b981" stroke-width="2" marker-end="url(#arrow-green)" />
+  <text x="612" y="1493" font-size="11" font-weight="700" fill="#10b981">YES</text>
+
+  <!-- 8. SYNTHESIS ENGINE -->
+  <g transform="translate(410, 1515)" filter="url(#shadow)">
+    <rect x="0" y="0" width="380" height="85" rx="12" fill="#1e293b" stroke="#10b981" stroke-width="1.5" />
+    <text x="190" y="25" font-size="13" font-weight="700" fill="#f8fafc" text-anchor="middle">✍️ Synthesis Engine &amp; Ollama Local LLM</text>
+    <text x="190" y="43" font-size="10" font-weight="400" fill="#94a3b8" text-anchor="middle">Generates custom formatted answer (tables, lists, side-by-side comps)</text>
+    <text x="190" y="58" font-size="10" font-weight="700" fill="#10b981" text-anchor="middle">Enforces exact document citations + upload timestamps</text>
+    <text x="190" y="70" font-size="9" font-weight="400" fill="#94a3b8" text-anchor="middle">Fast, fully local sandbox response without privacy leakage</text>
+  </g>
+
+  <path d="M 600,1600 L 600,1630" fill="none" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)" />
+
+  <!-- 9. DLP SCANS & REDIS CACHE STORAGE -->
+  <!-- 10. FORMATTED RESPONSE (END) -->
+  <g transform="translate(475, 1630)" filter="url(#shadow)">
+    <rect x="0" y="0" width="250" height="40" rx="20" fill="url(#successGrad)" stroke="#34d399" stroke-width="1.5" />
+    <text x="125" y="25" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">✅ Formatted Response</text>
+  </g>
+
+  <!-- Left box link to Formatted Response -->
+  <path d="M 185,1460 L 185,1650 L 475,1650" fill="none" stroke="#64748b" stroke-width="1.5" />
+
+</svg>
