@@ -37,7 +37,7 @@
 
 > See Local Brain in action: upload documents, ask questions, explore the knowledge graph.
 
-https://github.com/user-attachments/assets/localbrain_demo.mp4
+[https://github.com/user-attachments/assets/localbrain_demo.mp4](https://github.com/luckyramguguloth/LocalBrain/blob/main/assets/localbrain_demo.mp4)
 
 > **Note:** If the video does not play in your browser, [download it here](assets/localbrain_demo.mp4).
 
@@ -58,7 +58,6 @@ Upload files — PDFs, Word docs, Excel sheets, CSVs, Markdown, images — and t
 > Interactive, vector-crisp SVG architectural map. Fully scalable, responsive, and offline-compatible.
 > **Note:** For IDE or raw text fallbacks, click below to view the Mermaid representation.
 
-![System Architecture](assets/system_architecture.svg)
 
 <details>
 <summary>💻 View Mermaid Class Diagram Code</summary>
@@ -122,7 +121,6 @@ graph TB
 > Full neural-semantic workflow, fuzzy token resolution, intent classification, and RAG retrieval pathways.
 > **Note:** For IDE or raw text fallbacks, click below to view the Mermaid representation.
 
-![Query & RAG Response Flow](assets/query_rag_flow.svg)
 
 <details>
 <summary>💻 View Mermaid Flowchart Code</summary>
@@ -190,7 +188,7 @@ flowchart TD
 
 #### Semantic NLP Understanding
 - **Intent Detection** — Recognizes 7 intent types: `summarize`, `analyse`, `compare`, `locate`, `extract`, `table`, `general`
-- **Fuzzy Document Title Matching** — Uses token Jaccard similarity + bigram overlap + exact containment scoring. Asking *"summarize the primed ai document"* correctly finds `Primed_AI_Document.pdf` even with typos or partial names
+- **Fuzzy Document Title Matching** — Uses token Jaccard similarity + bigram overlap + exact containment scoring. Asking *"summarize the ai document"* correctly finds `AI_Document.pdf` even with typos or partial names
 - **Relevance Guard** — Returns `⚠️ Information not found` when retrieved chunks don't semantically match the query — never serves a wrong document
 - **Contextual Memory** — Sliding window of last 5 conversation turns for coherent multi-turn dialogue
 
@@ -389,30 +387,20 @@ localbrain/
 
 ---
 
-## 🗺️ API Reference
-
-| Method | Endpoint | Description |
-|:-------|:---------|:-----------|
-| `POST` | `/api/v1/query` | Submit a query — returns answer + citations |
-| `POST` | `/api/v1/upload` | Upload and index a document |
-| `GET` | `/api/v1/graph` | Fetch knowledge graph nodes & edges |
-| `GET` | `/api/v1/documents` | List all indexed documents |
-| `GET` | `/documents/{filename}` | Download a specific document |
-| `WS` | `/ws` | WebSocket for live ingestion event stream |
 
 ### Query Request/Response
 
 ```json
 // POST /api/v1/query
 {
-  "query": "Summarize the Primed AI document",
+  "query": "Summarize the AI document",
   "user_id": "default"
 }
 
 // Response
 {
-  "answer": "### 📄 Document Summary: `Primed_AI_Document.pdf`\n\n> According to **Primed_AI_Document.pdf** (uploaded: 2026-05-26 14:30:00)\n\n...",
-  "citations": ["Primed_AI_Document.pdf"],
+  "answer": "### 📄 Document Summary: `.pdf`\n\n> According to **.pdf** (uploaded: 2026-05-26 14:30:00)\n\n...",
+  "citations": [".pdf"],
   "latency_ms": 115
 }
 ```
