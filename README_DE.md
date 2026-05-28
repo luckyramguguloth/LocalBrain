@@ -32,16 +32,6 @@
 
 ---
 
-## 🎬 Demo-Aufzeichnung
-
-> Sieh Local Brain in Aktion: Dokumente hochladen, Fragen stellen, Wissensgraph erkunden.
-
-https://github.com/user-attachments/assets/localbrain_demo.mp4
-
-> **Hinweis:** Falls das Video im Browser nicht abgespielt wird, [hier herunterladen](assets/localbrain_demo.mp4).
-
----
-
 ## 🚀 Was ist Local Brain?
 
 Local Brain ist eine **private, selbst gehostete KI-Plattform**, die die Dokumente deiner Organisation in eine durchsuchbare, intelligente Wissensbasis verwandelt — vollständig betrieben von einem **lokalen LLM auf deiner eigenen Hardware**.
@@ -56,8 +46,6 @@ Du lädst Dateien hoch — PDFs, Word-Dokumente, Excel-Tabellen, CSVs, Markdown 
 
 > Vektorscharfe, interaktive SVG-Systemarchitekturkarte. Vollständig skalierbar, reaktionsschnell und offline-kompatibel.
 > **Hinweis:** Für IDEs oder Nur-Text-Reader klicken Sie unten, um die Mermaid-Darstellung anzuzeigen.
-
-![Systemarchitektur](assets/system_architecture.svg)
 
 <details>
 <summary>💻 Mermaid-Diagrammcode anzeigen</summary>
@@ -112,8 +100,6 @@ graph TB
 
 > Vollständiger neuro-semantischer Workflow, unscharfe Token-Auflösung, Absichts-Klassifizierung und RAG-Synthesepfade.
 > **Hinweis:** Für IDEs oder Nur-Text-Reader klicken Sie unten, um die Mermaid-Darstellung anzuzeigen.
-
-![Abfrage- und RAG-Antwortfluss](assets/query_rag_flow.svg)
 
 <details>
 <summary>💻 Mermaid-Diagrammcode anzeigen</summary>
