@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🧠 Local Brain
+![logo](assets/synapsecore_logo.png)  Local Brain
 
 ### Enterprise-Grade · On-Premise · 100% Private AI Knowledge Engine
 
