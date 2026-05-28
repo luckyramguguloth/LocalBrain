@@ -37,7 +37,7 @@
 
 > See Local Brain in action: upload documents, ask questions, explore the knowledge graph.
 
-[https://github.com/user-attachments/assets/localbrain_demo.mp4](https://github.com/luckyramguguloth/LocalBrain/blob/main/assets/localbrain_demo.mp4)
+https://github.com/user-attachments/assets/localbrain_demo.mp4
 
 > **Note:** If the video does not play in your browser, [download it here](assets/localbrain_demo.mp4).
 
@@ -58,6 +58,7 @@ Upload files — PDFs, Word docs, Excel sheets, CSVs, Markdown, images — and t
 > Interactive, vector-crisp SVG architectural map. Fully scalable, responsive, and offline-compatible.
 > **Note:** For IDE or raw text fallbacks, click below to view the Mermaid representation.
 
+![System Architecture](assets/system_architecture.svg)
 
 <details>
 <summary>💻 View Mermaid Class Diagram Code</summary>
@@ -121,6 +122,7 @@ graph TB
 > Full neural-semantic workflow, fuzzy token resolution, intent classification, and RAG retrieval pathways.
 > **Note:** For IDE or raw text fallbacks, click below to view the Mermaid representation.
 
+![Query & RAG Response Flow](assets/query_rag_flow.svg)
 
 <details>
 <summary>💻 View Mermaid Flowchart Code</summary>
@@ -166,9 +168,9 @@ flowchart TD
 |:------|:-----------|:--------|
 | **🖥️ Chat UI** | Next.js 14 + Glassmorphic CSS | Chat console, file upload, knowledge graph visualization |
 | **⚙️ API Backend** | FastAPI + Python 3.10+ | Document ingestion, RAG pipeline, NLP processing, RBAC, DLP |
-| **🧠 NLP Engine** | Custom Python NLP | Intent detection, fuzzy title matching, relevance guard |
+| **🧠 NLP Engine** | MarkItDown + Custom NLP | Markdown normalization, intent detection, fuzzy title matching |
 | **🔷 Vector DB** | Qdrant | 1024-dim semantic chunk storage, sub-200ms similarity search |
-| **🕸️ Graph DB** | Neo4j | Concept relationships, entity synapses, knowledge mapping |
+| **🕸️ Graph DB** | Neo4j | GraphRAG concept relationships, entity synapses, knowledge mapping |
 | **🐘 Relational DB** | PostgreSQL | File metadata, full content, permissions, user roles |
 | **⚡ Cache** | Redis | Query caching, WebSocket broadcast, session state |
 | **🤖 Local LLM** | Ollama / vLLM | Private embeddings + RAG answer synthesis (fully offline) |
@@ -188,21 +190,22 @@ flowchart TD
 
 #### Semantic NLP Understanding
 - **Intent Detection** — Recognizes 7 intent types: `summarize`, `analyse`, `compare`, `locate`, `extract`, `table`, `general`
-- **Fuzzy Document Title Matching** — Uses token Jaccard similarity + bigram overlap + exact containment scoring. Asking *"summarize the ai document"* correctly finds `AI_Document.pdf` even with typos or partial names
+- **Fuzzy Document Title Matching** — Uses token Jaccard similarity + bigram overlap + exact containment scoring. Asking *"summarize the primed ai document"* correctly finds `Primed_AI_Document.pdf` even with typos or partial names
 - **Relevance Guard** — Returns `⚠️ Information not found` when retrieved chunks don't semantically match the query — never serves a wrong document
 - **Contextual Memory** — Sliding window of last 5 conversation turns for coherent multi-turn dialogue
 
-#### Deep File Analysis
-- **PDF** — Full text extraction per page via PyPDF with binary fallback
-- **DOCX** — Direct XML paragraph parser (zero external dependencies)
-- **XLSX / XLS / CSV** — Shared-string cell resolver, multi-sheet row extraction, numeric statistics
-- **PPTX** — Slide-by-slide XML outline reconstruction
-- **JSON / TXT / MD** — Native parsers with full content indexing
+#### GraphRAG & Knowledge Extraction
+- **Graphify Techniques** — Deep semantic mapping of extracted `concepts`, `entities`, and `relationships` directly into a Neo4j knowledge graph.
+- **Pre-computed Relationships** — Provides the local LLM with blazingly fast context retrieval and profound conceptual memory.
+
+#### Deep File Analysis (powered by Microsoft MarkItDown)
+- **Unified Async Markdown Parsing** — Converts PDF, DOCX, XLSX, CSV, PPTX, JSON, TXT into clean Markdown natively using high-speed non-blocking syncio threads.
+- **Optimized for LLMs** — By standardizing all file types into Markdown, vector embeddings and LLM context comprehension are drastically improved.
 - **Images** — Registry path + download link generation
 
 #### Response Intelligence
 - **Format-Aware Synthesis** — Tables for numeric data, bullet summaries for text docs, slide outlines for presentations
-- **Citation Required** — Every answer cites exact document name + upload timestamp
+- **Citation Required & Dynamic Links** — Every answer cites exact document name + upload timestamp, and dynamically generates a robust, case-insensitive download link.
 - **Targeted Passage Finder** — Scores every sentence by query-token overlap to surface the most relevant passages
 - **Comparison Mode** — Side-by-side markdown tables for multi-document queries
 
@@ -387,20 +390,30 @@ localbrain/
 
 ---
 
+## 🗺️ API Reference
+
+| Method | Endpoint | Description |
+|:-------|:---------|:-----------|
+| `POST` | `/api/v1/query` | Submit a query — returns answer + citations |
+| `POST` | `/api/v1/upload` | Upload and index a document |
+| `GET` | `/api/v1/graph` | Fetch knowledge graph nodes & edges |
+| `GET` | `/api/v1/documents` | List all indexed documents |
+| `GET` | `/documents/{filename}` | Download a specific document |
+| `WS` | `/ws` | WebSocket for live ingestion event stream |
 
 ### Query Request/Response
 
 ```json
 // POST /api/v1/query
 {
-  "query": "Summarize the AI document",
+  "query": "Summarize the Primed AI document",
   "user_id": "default"
 }
 
 // Response
 {
-  "answer": "### 📄 Document Summary: `.pdf`\n\n> According to **.pdf** (uploaded: 2026-05-26 14:30:00)\n\n...",
-  "citations": [".pdf"],
+  "answer": "### 📄 Document Summary: `Primed_AI_Document.pdf`\n\n> According to **Primed_AI_Document.pdf** (uploaded: 2026-05-26 14:30:00)\n\n...",
+  "citations": ["Primed_AI_Document.pdf"],
   "latency_ms": 115
 }
 ```

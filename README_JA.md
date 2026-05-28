@@ -36,8 +36,7 @@
 
 > Local Brain の動作をご覧ください: ドキュメントのアップロード、質問、知識グラフの探索。
 
-[https://github.com/user-attachments/assets/localbrain_demo.mp4](https://github.com/luckyramguguloth/LocalBrain/blob/main/assets/localbrain_demo.mp4)
-
+https://github.com/user-attachments/assets/localbrain_demo.mp4
 
 > **注意:** ブラウザで動画が再生されない場合は、[こちらからダウンロード](assets/localbrain_demo.mp4)してください。
 
@@ -58,6 +57,7 @@ PDF、Wordドキュメント、Excelシート、CSV、Markdownなどのファイ
 > ベクターで鮮明なインタラクティブSVGシステムアーキテクチャマップ。完全にスケーラブル、レスポンシブ、かつオフライン対応。
 > **注意:** IDEやプレーンテキストリーダーをご使用の場合は、以下をクリックして Mermaid 表記を展開してください。
 
+![システムアーキテクチャ](assets/system_architecture.svg)
 
 <details>
 <summary>💻 Mermaid クラス図コードを表示</summary>
@@ -113,6 +113,7 @@ graph TB
 > 完全なニューラル・セマンティック・ワークフロー、ファジートークン解決、意図分類、および RAG 合成パス。
 > **注意:** IDEやプレーンテキストリーダーをご使用の場合は、以下をクリックして Mermaid 表記を展開してください。
 
+![クエリとRAGレスポンスフロー](assets/query_rag_flow.svg)
 
 <details>
 <summary>💻 Mermaid フローチャートコードを表示</summary>
@@ -160,9 +161,9 @@ Qdrantセマンティック]
 |:--------|:----|:----|
 | **🖥️ チャットUI** | Next.js 14 + グラスモーフィックCSS | チャットコンソール、ファイルアップロード、知識グラフ可視化 |
 | **⚙️ APIバックエンド** | FastAPI + Python 3.10+ | 取り込み、RAGパイプライン、NLP処理、RBAC、DLP |
-| **🧠 NLPエンジン** | カスタムPython NLP | 意図検出、ファジータイトルマッチ、関連性ガード |
+| **🧠 NLPエンジン** | MarkItDown + カスタムNLP | Markdown正規化、意図検出、ファジータイトルマッチ |
 | **🔷 ベクターDB** | Qdrant | 1024次元セマンティックチャンク、200ms以下の検索 |
-| **🕸️ グラフDB** | Neo4j | 概念関係、エンティティシナプス、知識マッピング |
+| **🕸️ グラフDB** | Neo4j | GraphRAG概念関係、エンティティシナプス、知識マッピング |
 | **🐘 リレーショナルDB** | PostgreSQL | ファイルメタデータ、全コンテンツ、権限、ロール |
 | **⚡ キャッシュ** | Redis | クエリキャッシング、WebSocketブロードキャスト |
 | **🤖 ローカルLLM** | Ollama / vLLM | プライベート埋め込み + RAG回答合成（完全オフライン） |

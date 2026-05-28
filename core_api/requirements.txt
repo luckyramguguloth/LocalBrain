@@ -6,6 +6,6 @@ qdrant-client
 neo4j
 asyncpg
 redis
-pypdf
+markitdown
 python-multipart
 uvicorn[standard]

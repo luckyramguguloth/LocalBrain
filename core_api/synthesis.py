@@ -1,4 +1,4 @@
-﻿import os
+import os
 import re
 import math
 import httpx
@@ -55,7 +55,7 @@ class NLPProcessor:
     # Intent taxonomy ─ ordered from most-specific to least
     INTENT_PATTERNS = {
         "summarize": re.compile(
-            r'\b(summar(?:ize|ise|y)|overview|brief|recap|tldr|gist|synopsis|abstract|digest)\b',
+            r'\b(summar(?:ize|ise|y|ze)|summerze|overview|brief|recap|tldr|gist|synopsis|abstract|digest)\b',
             re.I),
         "analyse": re.compile(
             r'\b(analys[ei]s|analyz[ei]|audit|breakdown|deep.?dive|examine|inspect|review|evaluate)\b',
@@ -438,6 +438,9 @@ class SynthesisEngine:
             "You are Local Brain, a private, on-premise AI Knowledge Engine.\n"
             "You behave exactly like a highly capable AI assistant — giving rich, "
             "formatted, structured answers — but you run 100% locally.\n\n"
+            "## Context Data Format\n"
+            "The context provided to you has been converted into rich Markdown via MarkItDown. "
+            "It is highly structured. Use this structure to give deep semantic responses.\n\n"
             "## Response Formatting Rules\n"
             "- Always match your response format to the user's intent:\n"
             "  • Summary request  → executive summary with bullet highlights\n"
@@ -449,14 +452,16 @@ class SynthesisEngine:
             "- Always cite the source document name and upload timestamp.\n"
             "- Use markdown tables when presenting numerical or comparative data.\n\n"
             "## Grounding Rules\n"
-            "- Ground ALL factual statements in the provided Context.\n"
+            "- Ground ALL factual statements in the provided Markdown Context.\n"
             "- If the Context does not contain the answer, say:\n"
             "  '⚠️ This information was not found in the indexed documents.'\n"
             "- NEVER hallucinate facts, filenames, or figures not in the Context.\n"
             "- For general questions (greetings, math, code), use your knowledge.\n\n"
-            "## Citation Format\n"
+            "## Citation & File Links\n"
             "When referencing a document, write:\n"
             "> According to **DocumentName** (uploaded: YYYY-MM-DD HH:MM:SS), …\n"
+            "You MUST also append a clickable download link immediately after referencing a file, in this EXACT format:\n"
+            "`[Download DocumentName](/documents/DocumentName)`\n"
         )
 
     # -----------------------------------------------------------------------

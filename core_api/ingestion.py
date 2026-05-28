@@ -1,9 +1,6 @@
 import os
 import re
-import csv
 import json
-import zipfile
-import xml.etree.ElementTree as ET
 import httpx
 import uuid
 from typing import Dict, List, Any, Tuple
@@ -11,155 +8,36 @@ from .logger import get_logger
 
 logger = get_logger("ingestion")
 
-# Optional high-quality PDF parsing import
+# Import MarkItDown for universal document-to-markdown parsing
 try:
-    import pypdf
+    from markitdown import MarkItDown
 except ImportError:
-    pypdf = None
+    MarkItDown = None
 
 # Local embeddings configuration fallback
 bge_model = None
 
 
 class DocumentParser:
-    """Extracts raw text from any uploaded document completely locally."""
+    """Extracts text from any uploaded document completely locally, standardizing to Markdown."""
 
     @staticmethod
     def parse(file_path: str) -> str:
-        ext = os.path.splitext(file_path)[1].lower()
-        if ext == '.pdf':
-            return DocumentParser._parse_pdf(file_path)
-        elif ext == '.docx':
-            return DocumentParser._parse_docx(file_path)
-        elif ext in ['.xlsx', '.xls']:
-            return DocumentParser._parse_xlsx(file_path)
-        elif ext == '.csv':
-            return DocumentParser._parse_csv(file_path)
-        elif ext == '.json':
-            return DocumentParser._parse_json(file_path)
-        elif ext in ['.md', '.markdown', '.txt']:
-            return DocumentParser._parse_txt(file_path)
-        else:
-            # Fallback: read raw text
-            return DocumentParser._parse_txt(file_path)
-
-    @staticmethod
-    def _parse_pdf(file_path: str) -> str:
-        if pypdf is not None:
+        if MarkItDown is not None:
             try:
-                reader = pypdf.PdfReader(file_path)
-                text = []
-                for idx, page in enumerate(reader.pages):
-                    page_text = page.extract_text()
-                    if page_text:
-                        text.append(page_text)
-                return "\n\n".join(text)
+                md = MarkItDown()
+                result = md.convert(file_path)
+                return result.text_content
             except Exception as e:
-                return f"[PDF Parse Error: {e}]"
+                logger.error(f"MarkItDown conversion failed for {file_path}: {e}")
+                return f"[Parse Error: {e}]"
         else:
-            # Secondary fallback: extract unicode chunks from binary if package is not compiled yet
+            logger.warning("MarkItDown not installed. Falling back to raw text read.")
             try:
-                with open(file_path, 'rb') as f:
-                    content = f.read()
-                # Basic ASCII/UTF-8 extraction
-                strings = re.findall(b'[\x20-\x7E]{4,}', content)
-                return "\n".join([s.decode('utf-8', errors='ignore') for s in strings])
+                with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
+                    return f.read()
             except Exception as e:
-                return f"[Binary Scan Error: {e}]"
-
-    @staticmethod
-    def _parse_docx(file_path: str) -> str:
-        """Dependency-free Word parser reading paragraph content from XML."""
-        try:
-            with zipfile.ZipFile(file_path) as z:
-                doc_xml = z.read('word/document.xml')
-                root = ET.fromstring(doc_xml)
-                ns = {'w': 'http://schemas.openxmlformats.org/wordprocessingml/2006/main'}
-                paragraphs = []
-                for p in root.findall('.//w:p', ns):
-                    text_elems = p.findall('.//w:r/w:t', ns)
-                    p_text = "".join([t.text for t in text_elems if t.text])
-                    if p_text.strip():
-                        paragraphs.append(p_text)
-                return "\n\n".join(paragraphs)
-        except Exception as e:
-            return f"[DOCX Parser Error: {e}]"
-
-    @staticmethod
-    def _parse_xlsx(file_path: str) -> str:
-        """Dependency-free Excel parser that constructs spreadsheet text maps directly from zip XMLs."""
-        try:
-            with zipfile.ZipFile(file_path) as z:
-                # 1. Parse Shared Strings XML to map indices to text representations
-                shared_strings = []
-                if 'xl/sharedStrings.xml' in z.namelist():
-                    sst_xml = z.read('xl/sharedStrings.xml')
-                    sst_root = ET.fromstring(sst_xml)
-                    ns = {'ns': 'http://schemas.openxmlformats.org/spreadsheetml/2006/main'}
-                    for t in sst_root.findall('.//ns:t', ns):
-                        shared_strings.append(t.text if t.text else "")
-
-                # 2. Iterate worksheets
-                sheet_files = sorted([name for name in z.namelist() if name.startswith('xl/worksheets/sheet')])
-                rows_text = []
-                ns_sheet = {'ns': 'http://schemas.openxmlformats.org/spreadsheetml/2006/main'}
-                
-                for idx, sheet_file in enumerate(sheet_files):
-                    rows_text.append(f"--- Sheet {idx + 1} ---")
-                    sheet_xml = z.read(sheet_file)
-                    sheet_root = ET.fromstring(sheet_xml)
-                    for row in sheet_root.findall('.//ns:row', ns_sheet):
-                        row_cells = []
-                        for c in row.findall('.//ns:c', ns_sheet):
-                            v_elem = c.find('ns:v', ns_sheet)
-                            if v_elem is not None:
-                                val = v_elem.text
-                                t_attr = c.attrib.get('t')
-                                # Check if it points to a shared string
-                                if t_attr == 's' and val:
-                                    try:
-                                        s_idx = int(val)
-                                        if s_idx < len(shared_strings):
-                                            val = shared_strings[s_idx]
-                                    except ValueError:
-                                        pass
-                                row_cells.append(val or "")
-                            else:
-                                row_cells.append("")
-                        if any(row_cells):
-                            rows_text.append(", ".join(row_cells))
-                return "\n".join(rows_text)
-        except Exception as e:
-            return f"[XLSX Parser Error: {e}]"
-
-    @staticmethod
-    def _parse_csv(file_path: str) -> str:
-        try:
-            lines = []
-            with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
-                reader = csv.reader(f)
-                for row in reader:
-                    lines.append(", ".join(row))
-            return "\n".join(lines)
-        except Exception as e:
-            return f"[CSV Parser Error: {e}]"
-
-    @staticmethod
-    def _parse_json(file_path: str) -> str:
-        try:
-            with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
-                data = json.load(f)
-                return json.dumps(data, indent=2)
-        except Exception as e:
-            return f"[JSON Parser Error: {e}]"
-
-    @staticmethod
-    def _parse_txt(file_path: str) -> str:
-        try:
-            with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
-                return f.read()
-        except Exception as e:
-            return f"[TXT Parser Error: {e}]"
+                return f"[Fallback TXT Parser Error: {e}]"
 
 
 class IngestionPipeline:
@@ -244,25 +122,27 @@ class IngestionPipeline:
 
     async def extract_concepts_and_entities(self, filename: str, doc_summary: str) -> Dict[str, Any]:
         """Queries the secure fast local model to extract concepts and entity relationships for Neo4j."""
-        prompt = f"""You are the concept miner for an Enterprise Company Brain.
+        prompt = f"""You are the core GraphRAG concept miner for an Enterprise Knowledge Engine.
 We have just ingested a document titled "{filename}".
-Here is a summary/context of the document:
+Here is a summary/context of the document (which has been converted to Markdown):
 ---
 {doc_summary}
 ---
 
-Your task is to analyze this content and return a JSON object with:
-1. "concepts": A list of key conceptual topics, workflows, technologies, or architectures discussed (maximum 5).
-2. "entities": A list of named entities like people, clients, repositories, channels, or servers (maximum 5).
-3. "relationships": A list of directional relationships between entities/concepts or the document itself. Each relation must have "source", "target", and "type" (e.g. "Security Policies" -> "vault_server" with type "INTEGRATES").
+Your task is to analyze this content and return a strict JSON object modeling a semantic knowledge graph.
+You must extract:
+1. "concepts": Abstract conceptual topics, domains, architectures, or overarching themes (maximum 5).
+2. "entities": Specific, named physical or digital entities (e.g., people, servers, repos, organizations, software components) (maximum 5).
+3. "relationships": A list of directed relationships between ANY combination of the extracted concepts and entities, OR between them and the document itself. Each relation must have "source", "target", and a highly descriptive "type" (e.g. "Security Policies" -> "vault_server" with type "ENFORCES_RULES_ON").
 
-Format your exact response strictly as a JSON block with no extra explanation. Example:
+Format your exact response strictly as a JSON block with no extra explanation or markdown ticks outside the JSON. Example:
 {{
   "concepts": ["User Authentication", "Session Token Storage"],
   "entities": ["keycloak_auth", "Postgres DB"],
   "relationships": [
-    {{"source": "User Authentication", "target": "keycloak_auth", "type": "RESOLVED_BY"}},
-    {{"source": "keycloak_auth", "target": "Postgres DB", "type": "PERSISTS_TO"}}
+    {{"source": "User Authentication", "target": "keycloak_auth", "type": "IMPLEMENTED_VIA"}},
+    {{"source": "keycloak_auth", "target": "Postgres DB", "type": "PERSISTS_STATE_TO"}},
+    {{"source": "{filename}", "target": "Session Token Storage", "type": "DESCRIBES_ARCHITECTURE"}}
   ]
 }}
 """

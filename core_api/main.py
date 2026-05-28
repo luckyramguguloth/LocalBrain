@@ -1,4 +1,4 @@
-﻿import os
+import os
 import uuid
 import shutil
 import asyncio
@@ -18,9 +18,25 @@ logger = get_logger("main")
 
 app = FastAPI(title="Local Brain Knowledge Engine API")
 
+from fastapi.responses import FileResponse
+from fastapi import HTTPException
+
 # Create persistent upload directory for static downloads
 os.makedirs("uploaded_docs", exist_ok=True)
-app.mount("/documents", StaticFiles(directory="uploaded_docs"), name="documents")
+
+@app.get("/documents/{filename:path}")
+async def serve_document(filename: str):
+    """Dynamic document route for case-insensitive and robust file serving."""
+    base_path = "uploaded_docs"
+    exact_path = os.path.join(base_path, filename)
+    if os.path.exists(exact_path):
+        return FileResponse(exact_path)
+    # Case-insensitive fallback
+    if os.path.exists(base_path):
+        for f in os.listdir(base_path):
+            if f.lower() == filename.lower():
+                return FileResponse(os.path.join(base_path, f))
+    raise HTTPException(status_code=404, detail="File not found in local vault")
 
 # Configure on-premise CORS rules
 app.add_middleware(
@@ -700,9 +716,9 @@ async def upload_document(file: UploadFile = File(...)):
 
     logger.info(f"Upload API: Processing '{safe_filename}' (sanitized from '{file.filename}')...")
     try:
-        # Step 1: Parse
+        # Step 1: Parse (Non-blocking async thread for faster uploads)
         await manager.broadcast({"type": "ingest", "source": "Parser", "item": f"Extracting text from '{safe_filename}'..."})
-        content = DocumentParser.parse(temp_path)
+        content = await asyncio.to_thread(DocumentParser.parse, temp_path)
         doc_size = os.path.getsize(temp_path)
         doc_type = os.path.splitext(safe_filename)[1].replace('.', '').lower()
 

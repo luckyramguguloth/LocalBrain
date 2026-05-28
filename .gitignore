@@ -1,3 +1,9 @@
+# ============================================================
+#  Local Brain — .gitignore
+#  Keeps sensitive credentials, runtime data, binaries,
+#  large uploads, caches, and local configs off GitHub.
+# ============================================================
+
 
 # ──────────────────────────────────────────────────────────
 # 1. ENVIRONMENT & SECRETS  ← most critical — NEVER commit
@@ -215,7 +221,9 @@ docker-compose.local.yml
 .\#*
 
 
+# ──────────────────────────────────────────────────────────
 # 9. OPERATING SYSTEM FILES
+# ──────────────────────────────────────────────────────────
 # macOS
 .DS_Store
 .DS_Store?
@@ -241,9 +249,9 @@ $RECYCLE.BIN/
 .nfs*
 
 
-
+# ──────────────────────────────────────────────────────────
 # 10. LARGE BINARY / MEDIA ASSETS
-
+# ──────────────────────────────────────────────────────────
 # Large / irrelevant binary assets — block by default
 assets/synapsecore_logo.png
 assets/*.jpg
@@ -251,6 +259,9 @@ assets/*.jpeg
 assets/*.gif
 assets/*.mov
 
+# ✅ KEEP these tracked — they are the demo screenshot & recording shown in the README
+!assets/localbrain_screenshot.png
+!assets/localbrain_demo.mp4
 
 # ML model weights / checkpoints (never commit)
 *.bin
@@ -268,8 +279,9 @@ model_cache/
 .cache/torch/
 
 
+# ──────────────────────────────────────────────────────────
 # 11. SCRATCH / TEMPORARY / TEST FILES
-
+# ──────────────────────────────────────────────────────────
 scratch/
 tmp/
 temp/
@@ -280,9 +292,9 @@ temp/
 *.orig
 
 
-
+# ──────────────────────────────────────────────────────────
 # 12. INTEGRATION WORKER SECRETS (Slack, Jira, Notion…)
-
+# ──────────────────────────────────────────────────────────
 # Worker config files that may contain webhook URLs / tokens
 workers/slack/config.json
 workers/jira/config.json
@@ -290,15 +302,17 @@ workers/docs/config.json
 workers/**/*.token
 workers/**/*.secret
 
-# 13. MCP SERVER LOCAL CONFIG
 
+# ──────────────────────────────────────────────────────────
+# 13. MCP SERVER LOCAL CONFIG
+# ──────────────────────────────────────────────────────────
 # Claude Desktop / Cursor local MCP config (contains local paths)
 claude_desktop_config.json
 .cursor/mcp.json
 
 
-
+# ──────────────────────────────────────────────────────────
 # 14. TYPING STUBS & GENERATED FILES
-
+# ──────────────────────────────────────────────────────────
 *.pyi
 py.typed
