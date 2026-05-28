@@ -36,7 +36,8 @@
 
 > Ve Local Brain en acción: sube documentos, haz preguntas, explora el grafo de conocimiento.
 
-https://github.com/user-attachments/assets/localbrain_demo.mp4
+[https://github.com/user-attachments/assets/localbrain_demo.mp4](https://github.com/luckyramguguloth/LocalBrain/blob/main/assets/localbrain_demo.mp4)
+
 
 > **Nota:** Si el video no se reproduce en tu navegador, [descárgalo aquí](assets/localbrain_demo.mp4).
 
@@ -56,8 +57,6 @@ Sube archivos — PDFs, documentos Word, hojas Excel, CSVs, Markdown — y el si
 
 > Mapa de arquitectura SVG vectorial nítido. Completamente escalable, responsivo y compatible offline.
 > **Nota:** Para entornos IDE o lectores de texto plano, haz clic abajo para ver la representación Mermaid.
-
-![Arquitectura del Sistema](assets/system_architecture.svg)
 
 <details>
 <summary>💻 Ver código de diagrama Mermaid</summary>
@@ -112,8 +111,6 @@ graph TB
 
 > Flujo de trabajo neuro-semántico completo, resolución difusa de tokens, clasificación de intención y vías de síntesis RAG.
 > **Nota:** Para entornos IDE o lectores de texto plano, haz clic abajo para ver la representación Mermaid.
-
-![Flujo de Consulta RAG](assets/query_rag_flow.svg)
 
 <details>
 <summary>💻 Ver código de diagrama Mermaid</summary>
