@@ -1,6 +1,10 @@
 <div align="center">
 
-![logo](assets/synapsecore_logo.png)  Local Brain
+<p align="center">
+  <img src="assets/synapsecore_logo.png" alt="Logo" width="80" height="80" />
+</p>
+
+<h1 align="center">Local Brain</h1>
 
 ### Enterprise-Grade · On-Premise · 100% Private AI Knowledge Engine
 
