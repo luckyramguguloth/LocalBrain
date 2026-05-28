@@ -36,7 +36,8 @@
 
 > Local Brain の動作をご覧ください: ドキュメントのアップロード、質問、知識グラフの探索。
 
-https://github.com/user-attachments/assets/localbrain_demo.mp4
+[https://github.com/user-attachments/assets/localbrain_demo.mp4](https://github.com/luckyramguguloth/LocalBrain/blob/main/assets/localbrain_demo.mp4)
+
 
 > **注意:** ブラウザで動画が再生されない場合は、[こちらからダウンロード](assets/localbrain_demo.mp4)してください。
 
@@ -57,7 +58,6 @@ PDF、Wordドキュメント、Excelシート、CSV、Markdownなどのファイ
 > ベクターで鮮明なインタラクティブSVGシステムアーキテクチャマップ。完全にスケーラブル、レスポンシブ、かつオフライン対応。
 > **注意:** IDEやプレーンテキストリーダーをご使用の場合は、以下をクリックして Mermaid 表記を展開してください。
 
-![システムアーキテクチャ](assets/system_architecture.svg)
 
 <details>
 <summary>💻 Mermaid クラス図コードを表示</summary>
@@ -113,7 +113,6 @@ graph TB
 > 完全なニューラル・セマンティック・ワークフロー、ファジートークン解決、意図分類、および RAG 合成パス。
 > **注意:** IDEやプレーンテキストリーダーをご使用の場合は、以下をクリックして Mermaid 表記を展開してください。
 
-![クエリとRAGレスポンスフロー](assets/query_rag_flow.svg)
 
 <details>
 <summary>💻 Mermaid フローチャートコードを表示</summary>
